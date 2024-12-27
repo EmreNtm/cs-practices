@@ -15,8 +15,8 @@ int main(void) {
 	bool type;
 	int efile, islem;
 	char resimadi[100], sonek[10];
-	printf("Ogrenci adi: Emre Nitim\n");
-	printf("Ogrenci numarasi: 17011079\n");
+	printf("Ogrenci adi: ---\n");
+	printf("Ogrenci numarasi: ---\n");
 	do {
 		printf("Islem yapilacak resmin yolunu (path) giriniz:\n-> ");
 		scanf("%s", &resimadi);
@@ -80,200 +80,200 @@ int main(void) {
 void sagaDondur(short n, int resim) {
 	//KODUNUZU BURADAN BASLAYARAK YAZINIZ
 	__asm {
-		MOV CX, n		//Uyguladığım algoritma resme üçgen şeklinde erişip,
-		SHR CX, 1		//değişmesi gereken 4 noktayı tek seferde uygun yere koymayı gerektiriyor.
-		XOR ESI, ESI	//Bunun için dış döngü n/2 , iç döngü ise n-1-2i kere dönmeli.
-		MOV EDI, resim	//Dış döngü i = 0'dan, iç döngü ise j = i den başlamalı.
-						//(i = ESI/2 ve j = EBX/2) (ESI ve EBX registerlarını 2şer 2şer artırdığım için böyle.)
+		MOV CX, n		//UyguladÄ±ÄŸÄ±m algoritma resme Ã¼Ã§gen ÅŸeklinde eriÅŸip,
+		SHR CX, 1		//deÄŸiÅŸmesi gereken 4 noktayÄ± tek seferde uygun yere koymayÄ± gerektiriyor.
+		XOR ESI, ESI	//Bunun iÃ§in dÄ±ÅŸ dÃ¶ngÃ¼ n/2 , iÃ§ dÃ¶ngÃ¼ ise n-1-2i kere dÃ¶nmeli.
+		MOV EDI, resim	//DÄ±ÅŸ dÃ¶ngÃ¼ i = 0'dan, iÃ§ dÃ¶ngÃ¼ ise j = i den baÅŸlamalÄ±.
+						//(i = ESI/2 ve j = EBX/2) (ESI ve EBX registerlarÄ±nÄ± 2ÅŸer 2ÅŸer artÄ±rdÄ±ÄŸÄ±m iÃ§in bÃ¶yle.)
 	L2: PUSH CX
 		MOV CX, n
 		DEC CX			//CX = n-1-2i
-		SUB CX, SI		//SI yı 2 şer 2 şer artırdığım için 1 kere çıkarmak yeterli oldu.
+		SUB CX, SI		//SI yÄ± 2 ÅŸer 2 ÅŸer artÄ±rdÄ±ÄŸÄ±m iÃ§in 1 kere Ã§Ä±karmak yeterli oldu.
 		MOV EBX, ESI	//(j = EBX/2 = ESI/2 = i)
 	
 	L1: PUSH ESI    
-		PUSH EBX		//i ve j değerlerinin kaybolmaması için gerekli PUSH işlemleri.
+		PUSH EBX		//i ve j deÄŸerlerinin kaybolmamasÄ± iÃ§in gerekli PUSH iÅŸlemleri.
 
-		MOV EAX, DWORD PTR n //Bu 4 satır ile EAX değerini, değişmesi gereken 1. noktanın (yani sol üst parça)
-		MUL ESI				 //resim dizisinden uzaklığına eşitleyip değerin kaybolmaması için pushluyoruz.
-	    ADD EAX, EBX		 //(daha sonra bu değer ESI ya alınıp [EDI + ESI] şeklinde istenilen noktaya ulaşmak
-		PUSH EAX			 //için kullanılıyor.) (EAX = 2*( i*n + j ) )
-							 //buradaki çarpı 2 dizinin word olmasından geliyor.)
+		MOV EAX, DWORD PTR n //Bu 4 satÄ±r ile EAX deÄŸerini, deÄŸiÅŸmesi gereken 1. noktanÄ±n (yani sol Ã¼st parÃ§a)
+		MUL ESI				 //resim dizisinden uzaklÄ±ÄŸÄ±na eÅŸitleyip deÄŸerin kaybolmamasÄ± iÃ§in pushluyoruz.
+	    ADD EAX, EBX		 //(daha sonra bu deÄŸer ESI ya alÄ±nÄ±p [EDI + ESI] ÅŸeklinde istenilen noktaya ulaÅŸmak
+		PUSH EAX			 //iÃ§in kullanÄ±lÄ±yor.) (EAX = 2*( i*n + j ) )
+							 //buradaki Ã§arpÄ± 2 dizinin word olmasÄ±ndan geliyor.)
 		
-		MOV EAX, DWORD PTR n //Bu 9 satır ile EAX değerini, değişmesi gereken 4. noktanın (yani sol alt parça)
-		ADD EAX, DWORD PTR n //resim dizisinden uzaklığına eşitleyip değerin kaybolmaması için pushluyoruz.
-		SUB EAX, 2			 //(daha sonra bu değer EBX'e alınıp [EDI + EBX] şeklinde istenilen noktaya ulaşmak
-		SUB EAX, EBX		 //için kullanılıyor.) (EAX = 2*( (n-1-j)*n + i )
-		MUL DWORD PTR n		 //buradaki çarpı 2 dizinin word olmasından geliyor.)
-		ADD EAX, ESI		 //(EBX ve ESI değerlerini 2 şer olarak artırdığım için 2 kere çıkarmaya gerek yok.)
+		MOV EAX, DWORD PTR n //Bu 9 satÄ±r ile EAX deÄŸerini, deÄŸiÅŸmesi gereken 4. noktanÄ±n (yani sol alt parÃ§a)
+		ADD EAX, DWORD PTR n //resim dizisinden uzaklÄ±ÄŸÄ±na eÅŸitleyip deÄŸerin kaybolmamasÄ± iÃ§in pushluyoruz.
+		SUB EAX, 2			 //(daha sonra bu deÄŸer EBX'e alÄ±nÄ±p [EDI + EBX] ÅŸeklinde istenilen noktaya ulaÅŸmak
+		SUB EAX, EBX		 //iÃ§in kullanÄ±lÄ±yor.) (EAX = 2*( (n-1-j)*n + i )
+		MUL DWORD PTR n		 //buradaki Ã§arpÄ± 2 dizinin word olmasÄ±ndan geliyor.)
+		ADD EAX, ESI		 //(EBX ve ESI deÄŸerlerini 2 ÅŸer olarak artÄ±rdÄ±ÄŸÄ±m iÃ§in 2 kere Ã§Ä±karmaya gerek yok.)
 		POP EDX
-		PUSH EAX //Buradaki POP EDX VE PUSH EDX işlemleri 1. noktayı stack'in en üstüne taşımak için kullanılıyor.
+		PUSH EAX //Buradaki POP EDX VE PUSH EDX iÅŸlemleri 1. noktayÄ± stack'in en Ã¼stÃ¼ne taÅŸÄ±mak iÃ§in kullanÄ±lÄ±yor.
 		PUSH EDX
 
 		JMP L4
-	L0: JMP L1  //LOOP işlemlerinin zıplama mesafesi yetersiz kaldığı için oluşturduğum ara zıplama basamağı
+	L0: JMP L1  //LOOP iÅŸlemlerinin zÄ±plama mesafesi yetersiz kaldÄ±ÄŸÄ± iÃ§in oluÅŸturduÄŸum ara zÄ±plama basamaÄŸÄ±
 	L3: JMP L2
 
-	L4: MOV EAX, DWORD PTR n //Bu 12 satır ile EAX değerini, değişmesi gereken 3. noktanın (yani sağ alt parça)
-		ADD EAX, DWORD PTR n //resim dizisinden uzaklığına eşitleyip değerin kaybolmaması için pushluyoruz.
-		SUB EAX, 2			 //(daha sonra bu değer EBX'e alınıp [EDI + EBX] şeklinde istenilen noktaya ulaşmak
-		SUB EAX, ESI		 //için kullanılıyor.) (EAX = 2*( (n-1-i)*n + (n-1-j) )
-		MUL DWORD PTR n      //buradaki çarpı 2 dizinin word olmasından geliyor.)
+	L4: MOV EAX, DWORD PTR n //Bu 12 satÄ±r ile EAX deÄŸerini, deÄŸiÅŸmesi gereken 3. noktanÄ±n (yani saÄŸ alt parÃ§a)
+		ADD EAX, DWORD PTR n //resim dizisinden uzaklÄ±ÄŸÄ±na eÅŸitleyip deÄŸerin kaybolmamasÄ± iÃ§in pushluyoruz.
+		SUB EAX, 2			 //(daha sonra bu deÄŸer EBX'e alÄ±nÄ±p [EDI + EBX] ÅŸeklinde istenilen noktaya ulaÅŸmak
+		SUB EAX, ESI		 //iÃ§in kullanÄ±lÄ±yor.) (EAX = 2*( (n-1-i)*n + (n-1-j) )
+		MUL DWORD PTR n      //buradaki Ã§arpÄ± 2 dizinin word olmasÄ±ndan geliyor.)
 		ADD EAX, DWORD PTR n
 		ADD EAX, DWORD PTR n
 		SUB EAX, 2
 		SUB EAX, EBX
 		POP EDX
-		PUSH EAX //Buradaki POP EDX VE PUSH EDX işlemleri 1. noktayı stack'in en üstüne taşımak için kullanılıyor.
+		PUSH EAX //Buradaki POP EDX VE PUSH EDX iÅŸlemleri 1. noktayÄ± stack'in en Ã¼stÃ¼ne taÅŸÄ±mak iÃ§in kullanÄ±lÄ±yor.
 		PUSH EDX
 		
-		MOV EAX, EBX		 //Bu 9 satır ile EAX değerini, değişmesi gereken 2. noktanın (yani sağ üst parça)
-		MUL DWORD PTR n		 //resim dizisinden uzaklığına eşitleyip değerin kaybolmaması için pushluyoruz.
-		ADD EAX, DWORD PTR n //(daha sonra bu değer EBX'e alınıp [EDI + EBX] şeklinde istenilen noktaya ulaşmak
-		ADD EAX, DWORD PTR n //için kullanılıyor.) (EAX = 2*( j*n + (n-1-i) )
-		SUB EAX, 2			 //buradaki çarpı 2 dizinin word olmasından geliyor.)
+		MOV EAX, EBX		 //Bu 9 satÄ±r ile EAX deÄŸerini, deÄŸiÅŸmesi gereken 2. noktanÄ±n (yani saÄŸ Ã¼st parÃ§a)
+		MUL DWORD PTR n		 //resim dizisinden uzaklÄ±ÄŸÄ±na eÅŸitleyip deÄŸerin kaybolmamasÄ± iÃ§in pushluyoruz.
+		ADD EAX, DWORD PTR n //(daha sonra bu deÄŸer EBX'e alÄ±nÄ±p [EDI + EBX] ÅŸeklinde istenilen noktaya ulaÅŸmak
+		ADD EAX, DWORD PTR n //iÃ§in kullanÄ±lÄ±yor.) (EAX = 2*( j*n + (n-1-i) )
+		SUB EAX, 2			 //buradaki Ã§arpÄ± 2 dizinin word olmasÄ±ndan geliyor.)
 		SUB EAX, ESI
 		POP EDX
-		PUSH EAX //Buradaki POP EDX VE PUSH EDX işlemleri 1. noktayı stack'in en üstüne taşımak için kullanılıyor.
+		PUSH EAX //Buradaki POP EDX VE PUSH EDX iÅŸlemleri 1. noktayÄ± stack'in en Ã¼stÃ¼ne taÅŸÄ±mak iÃ§in kullanÄ±lÄ±yor.
 		PUSH EDX
 
-		//Gerekli tüm noktaları aldık. Buradan itibaren swap işlemlerine başlıyoruz
+		//Gerekli tÃ¼m noktalarÄ± aldÄ±k. Buradan itibaren swap iÅŸlemlerine baÅŸlÄ±yoruz
 
-		POP ESI //ESI 1.noktanın uzaklık değerini alıyor.
-		POP EBX //EBX 2.noktanın uzaklık değerini alıyor.
+		POP ESI //ESI 1.noktanÄ±n uzaklÄ±k deÄŸerini alÄ±yor.
+		POP EBX //EBX 2.noktanÄ±n uzaklÄ±k deÄŸerini alÄ±yor.
 		PUSH WORD PTR[EDI + ESI]
 		PUSH WORD PTR[EDI + EBX]
 		POP WORD PTR[EDI + ESI]
-		POP WORD PTR[EDI + EBX] //Bu işlemler ile 1. ve 2.nokta yer değiştirmiş oldu.
+		POP WORD PTR[EDI + EBX] //Bu iÅŸlemler ile 1. ve 2.nokta yer deÄŸiÅŸtirmiÅŸ oldu.
 		
-		POP EBX //EBX 3.noktanın uzaklık değerini alıyor. ESI hala 1.noktada fakat artık içerisinde 2.nokta var.
+		POP EBX //EBX 3.noktanÄ±n uzaklÄ±k deÄŸerini alÄ±yor. ESI hala 1.noktada fakat artÄ±k iÃ§erisinde 2.nokta var.
 		PUSH WORD PTR[EDI + ESI]
 		PUSH WORD PTR[EDI + EBX]
 		POP WORD PTR[EDI + ESI]
-		POP WORD PTR[EDI + EBX] //Bu işlemler ile 1. ve 3.nokta yer değiştirmiş oldu.
-								//Bu işlemden sonra 1.nokta 3.noktayı, 3.nokta 2.noktayı içeriyor.
+		POP WORD PTR[EDI + EBX] //Bu iÅŸlemler ile 1. ve 3.nokta yer deÄŸiÅŸtirmiÅŸ oldu.
+								//Bu iÅŸlemden sonra 1.nokta 3.noktayÄ±, 3.nokta 2.noktayÄ± iÃ§eriyor.
 
-		POP EBX //EBX 4.noktanın uzaklık değerini alıyor. ESI hala 1.noktada fakat artık içerisinde 3.nokta var.
+		POP EBX //EBX 4.noktanÄ±n uzaklÄ±k deÄŸerini alÄ±yor. ESI hala 1.noktada fakat artÄ±k iÃ§erisinde 3.nokta var.
 		PUSH WORD PTR[EDI + ESI]
 		PUSH WORD PTR[EDI + EBX]
 		POP WORD PTR[EDI + ESI]
-		POP WORD PTR[EDI + EBX] //Bu işlemler ile 1. ve 4.nokta yer değiştirmiş oldu.
+		POP WORD PTR[EDI + EBX] //Bu iÅŸlemler ile 1. ve 4.nokta yer deÄŸiÅŸtirmiÅŸ oldu.
 		
-		//Swap işlemleri bitti. Sonuç olarak:
-		//1.noktanın içerisinde 4.nokta,
-		//2.noktanın içerisinde 1.nokta,
-		//3.noktanın içerisinde 2.nokta,
-		//4.noktanın içerisinde 3.nokta bulunuyor.
+		//Swap iÅŸlemleri bitti. SonuÃ§ olarak:
+		//1.noktanÄ±n iÃ§erisinde 4.nokta,
+		//2.noktanÄ±n iÃ§erisinde 1.nokta,
+		//3.noktanÄ±n iÃ§erisinde 2.nokta,
+		//4.noktanÄ±n iÃ§erisinde 3.nokta bulunuyor.
 
 		POP EBX 
-		POP ESI //değiştirdiğimiz EBX ve ESI yı tekrar indis değerlerine getiriyoruz.
-		ADD EBX, 2 //j indisini artırıyoruz
-	    LOOP L0 //L0 üzerinden L1'e zıplıyor.
+		POP ESI //deÄŸiÅŸtirdiÄŸimiz EBX ve ESI yÄ± tekrar indis deÄŸerlerine getiriyoruz.
+		ADD EBX, 2 //j indisini artÄ±rÄ±yoruz
+	    LOOP L0 //L0 Ã¼zerinden L1'e zÄ±plÄ±yor.
 	    
-		ADD ESI, 2 //i indisini artırıyoruz
+		ADD ESI, 2 //i indisini artÄ±rÄ±yoruz
 		POP CX
-	    LOOP L3 //L3 üzerinden L2'ye zıplıyor.
+	    LOOP L3 //L3 Ã¼zerinden L2'ye zÄ±plÄ±yor.
 	}
 	//KODUNUZU YAZMAYI BURADA BITIRINIZ
 }
 
 void solaDondur(short n, int resim) {
 	//KODUNUZU BURADAN BASLAYARAK YAZINIZ
-	//Çözümün sağa döndürmekten tek farklı yanı, swap yapılma sırası.
+	//Ã‡Ã¶zÃ¼mÃ¼n saÄŸa dÃ¶ndÃ¼rmekten tek farklÄ± yanÄ±, swap yapÄ±lma sÄ±rasÄ±.
 	__asm {
-		MOV CX, n		//Uyguladığım algoritma resme üçgen şeklinde erişip,
-		SHR CX, 1		//değişmesi gereken 4 noktayı tek seferde uygun yere koymayı gerektiriyor.
-		XOR ESI, ESI	//Bunun için dış döngü n/2 , iç döngü ise n-1-2i kere dönmeli.
-		MOV EDI, resim  //Dış döngü i = 0'dan, iç döngü ise j = i den başlamalı.
-						//(i = ESI/2 ve j = EBX/2) (ESI ve EBX registerlarını 2şer 2şer artırdığım için böyle.)
+		MOV CX, n		//UyguladÄ±ÄŸÄ±m algoritma resme Ã¼Ã§gen ÅŸeklinde eriÅŸip,
+		SHR CX, 1		//deÄŸiÅŸmesi gereken 4 noktayÄ± tek seferde uygun yere koymayÄ± gerektiriyor.
+		XOR ESI, ESI	//Bunun iÃ§in dÄ±ÅŸ dÃ¶ngÃ¼ n/2 , iÃ§ dÃ¶ngÃ¼ ise n-1-2i kere dÃ¶nmeli.
+		MOV EDI, resim  //DÄ±ÅŸ dÃ¶ngÃ¼ i = 0'dan, iÃ§ dÃ¶ngÃ¼ ise j = i den baÅŸlamalÄ±.
+						//(i = ESI/2 ve j = EBX/2) (ESI ve EBX registerlarÄ±nÄ± 2ÅŸer 2ÅŸer artÄ±rdÄ±ÄŸÄ±m iÃ§in bÃ¶yle.)
 	L2: PUSH CX
 		MOV CX, n		
 		DEC CX			//CX = n-1-2i
-		SUB CX, SI		//SI yı 2 şer 2 şer artırdığım için 1 kere çıkarmak yeterli oldu.
+		SUB CX, SI		//SI yÄ± 2 ÅŸer 2 ÅŸer artÄ±rdÄ±ÄŸÄ±m iÃ§in 1 kere Ã§Ä±karmak yeterli oldu.
 		MOV EBX, ESI	//(j = EBX/2 = ESI/2 = i)
 
 	L1: PUSH ESI
-		PUSH EBX		//i ve j değerlerinin kaybolmaması için gerekli PUSH işlemleri.
+		PUSH EBX		//i ve j deÄŸerlerinin kaybolmamasÄ± iÃ§in gerekli PUSH iÅŸlemleri.
 
-		MOV EAX, DWORD PTR n //Bu 4 satır ile EAX değerini, değişmesi gereken 1. noktanın (yani sol üst parça)
-		MUL ESI				 //resim dizisinden uzaklığına eşitleyip değerin kaybolmaması için pushluyoruz.
-	   	ADD EAX, EBX		 //(daha sonra bu değer ESI ya alınıp [EDI + ESI] şeklinde istenilen noktaya ulaşmak
-		PUSH EAX			 //için kullanılıyor.) (EAX = 2*( i*n + j ) )
-							 //buradaki çarpı 2 dizinin word olmasından geliyor.)
+		MOV EAX, DWORD PTR n //Bu 4 satÄ±r ile EAX deÄŸerini, deÄŸiÅŸmesi gereken 1. noktanÄ±n (yani sol Ã¼st parÃ§a)
+		MUL ESI				 //resim dizisinden uzaklÄ±ÄŸÄ±na eÅŸitleyip deÄŸerin kaybolmamasÄ± iÃ§in pushluyoruz.
+	   	ADD EAX, EBX		 //(daha sonra bu deÄŸer ESI ya alÄ±nÄ±p [EDI + ESI] ÅŸeklinde istenilen noktaya ulaÅŸmak
+		PUSH EAX			 //iÃ§in kullanÄ±lÄ±yor.) (EAX = 2*( i*n + j ) )
+							 //buradaki Ã§arpÄ± 2 dizinin word olmasÄ±ndan geliyor.)
 			
-		MOV EAX, EBX		 //Bu 9 satır ile EAX değerini, değişmesi gereken 2. noktanın (yani sağ üst parça)
-		MUL DWORD PTR n		 //resim dizisinden uzaklığına eşitleyip değerin kaybolmaması için pushluyoruz.
-		ADD EAX, DWORD PTR n //(daha sonra bu değer EBX'e alınıp [EDI + EBX] şeklinde istenilen noktaya ulaşmak
-		ADD EAX, DWORD PTR n //için kullanılıyor.) (EAX = 2*( j*n + (n-1-i) )
-		SUB EAX, 2			 //buradaki çarpı 2 dizinin word olmasından geliyor.)
+		MOV EAX, EBX		 //Bu 9 satÄ±r ile EAX deÄŸerini, deÄŸiÅŸmesi gereken 2. noktanÄ±n (yani saÄŸ Ã¼st parÃ§a)
+		MUL DWORD PTR n		 //resim dizisinden uzaklÄ±ÄŸÄ±na eÅŸitleyip deÄŸerin kaybolmamasÄ± iÃ§in pushluyoruz.
+		ADD EAX, DWORD PTR n //(daha sonra bu deÄŸer EBX'e alÄ±nÄ±p [EDI + EBX] ÅŸeklinde istenilen noktaya ulaÅŸmak
+		ADD EAX, DWORD PTR n //iÃ§in kullanÄ±lÄ±yor.) (EAX = 2*( j*n + (n-1-i) )
+		SUB EAX, 2			 //buradaki Ã§arpÄ± 2 dizinin word olmasÄ±ndan geliyor.)
 		SUB EAX, ESI
 		POP EDX
-		PUSH EAX //Buradaki POP EDX VE PUSH EDX işlemleri 1. noktayı stack'in en üstüne taşımak için kullanılıyor.
+		PUSH EAX //Buradaki POP EDX VE PUSH EDX iÅŸlemleri 1. noktayÄ± stack'in en Ã¼stÃ¼ne taÅŸÄ±mak iÃ§in kullanÄ±lÄ±yor.
 		PUSH EDX
 
 		JMP L4
-	L0: JMP L1 //LOOP işlemlerinin zıplama mesafesi yetersiz kaldığı için oluşturduğum ara zıplama basamağı
+	L0: JMP L1 //LOOP iÅŸlemlerinin zÄ±plama mesafesi yetersiz kaldÄ±ÄŸÄ± iÃ§in oluÅŸturduÄŸum ara zÄ±plama basamaÄŸÄ±
 	L3: JMP L2
 
-	L4: MOV EAX, DWORD PTR n //Bu 12 satır ile EAX değerini, değişmesi gereken 3. noktanın (yani sağ alt parça)
-		ADD EAX, DWORD PTR n //resim dizisinden uzaklığına eşitleyip değerin kaybolmaması için pushluyoruz.
-		SUB EAX, 2			 //(daha sonra bu değer EBX'e alınıp [EDI + EBX] şeklinde istenilen noktaya ulaşmak
-		SUB EAX, ESI		 //için kullanılıyor.) (EAX = 2*( (n-1-i)*n + (n-1-j) )
-		MUL DWORD PTR n		 //buradaki çarpı 2 dizinin word olmasından geliyor.)
+	L4: MOV EAX, DWORD PTR n //Bu 12 satÄ±r ile EAX deÄŸerini, deÄŸiÅŸmesi gereken 3. noktanÄ±n (yani saÄŸ alt parÃ§a)
+		ADD EAX, DWORD PTR n //resim dizisinden uzaklÄ±ÄŸÄ±na eÅŸitleyip deÄŸerin kaybolmamasÄ± iÃ§in pushluyoruz.
+		SUB EAX, 2			 //(daha sonra bu deÄŸer EBX'e alÄ±nÄ±p [EDI + EBX] ÅŸeklinde istenilen noktaya ulaÅŸmak
+		SUB EAX, ESI		 //iÃ§in kullanÄ±lÄ±yor.) (EAX = 2*( (n-1-i)*n + (n-1-j) )
+		MUL DWORD PTR n		 //buradaki Ã§arpÄ± 2 dizinin word olmasÄ±ndan geliyor.)
 		ADD EAX, DWORD PTR n
 		ADD EAX, DWORD PTR n
 		SUB EAX, 2
 		SUB EAX, EBX
 		POP EDX
-		PUSH EAX //Buradaki POP EDX VE PUSH EDX işlemleri 1. noktayı stack'in en üstüne taşımak için kullanılıyor.
+		PUSH EAX //Buradaki POP EDX VE PUSH EDX iÅŸlemleri 1. noktayÄ± stack'in en Ã¼stÃ¼ne taÅŸÄ±mak iÃ§in kullanÄ±lÄ±yor.
 		PUSH EDX
 
-		MOV EAX, DWORD PTR n //Bu 9 satır ile EAX değerini, değişmesi gereken 4. noktanın (yani sol alt parça)
-		ADD EAX, DWORD PTR n //resim dizisinden uzaklığına eşitleyip değerin kaybolmaması için pushluyoruz.
-		SUB EAX, 2			 //(daha sonra bu değer EBX'e alınıp [EDI + EBX] şeklinde istenilen noktaya ulaşmak
-		SUB EAX, EBX		 //için kullanılıyor.) (EAX = 2*( (n-1-j)*n + i )
-		MUL DWORD PTR n		 //buradaki çarpı 2 dizinin word olmasından geliyor.)
-		ADD EAX, ESI		 //(EBX ve ESI değerlerini 2 şer olarak artırdığım için 2 kere çıkarmaya gerek yok.)
+		MOV EAX, DWORD PTR n //Bu 9 satÄ±r ile EAX deÄŸerini, deÄŸiÅŸmesi gereken 4. noktanÄ±n (yani sol alt parÃ§a)
+		ADD EAX, DWORD PTR n //resim dizisinden uzaklÄ±ÄŸÄ±na eÅŸitleyip deÄŸerin kaybolmamasÄ± iÃ§in pushluyoruz.
+		SUB EAX, 2			 //(daha sonra bu deÄŸer EBX'e alÄ±nÄ±p [EDI + EBX] ÅŸeklinde istenilen noktaya ulaÅŸmak
+		SUB EAX, EBX		 //iÃ§in kullanÄ±lÄ±yor.) (EAX = 2*( (n-1-j)*n + i )
+		MUL DWORD PTR n		 //buradaki Ã§arpÄ± 2 dizinin word olmasÄ±ndan geliyor.)
+		ADD EAX, ESI		 //(EBX ve ESI deÄŸerlerini 2 ÅŸer olarak artÄ±rdÄ±ÄŸÄ±m iÃ§in 2 kere Ã§Ä±karmaya gerek yok.)
 		POP EDX
-		PUSH EAX //Buradaki POP EDX VE PUSH EDX işlemleri 1. noktayı stack'in en üstüne taşımak için kullanılıyor.
+		PUSH EAX //Buradaki POP EDX VE PUSH EDX iÅŸlemleri 1. noktayÄ± stack'in en Ã¼stÃ¼ne taÅŸÄ±mak iÃ§in kullanÄ±lÄ±yor.
 		PUSH EDX
 
-		//Gerekli tüm noktaları aldık. Buradan itibaren swap işlemlerine başlıyoruz
+		//Gerekli tÃ¼m noktalarÄ± aldÄ±k. Buradan itibaren swap iÅŸlemlerine baÅŸlÄ±yoruz
 
-		POP ESI //ESI 1.noktanın uzaklık değerini alıyor.
-		POP EBX //EBX 4.noktanın uzaklık değerini alıyor.
+		POP ESI //ESI 1.noktanÄ±n uzaklÄ±k deÄŸerini alÄ±yor.
+		POP EBX //EBX 4.noktanÄ±n uzaklÄ±k deÄŸerini alÄ±yor.
 		PUSH WORD PTR[EDI + ESI]
 		PUSH WORD PTR[EDI + EBX]
 		POP WORD PTR[EDI + ESI]
-		POP WORD PTR[EDI + EBX] //Bu işlemler ile 1. ve 4.nokta yer değiştirmiş oldu.
+		POP WORD PTR[EDI + EBX] //Bu iÅŸlemler ile 1. ve 4.nokta yer deÄŸiÅŸtirmiÅŸ oldu.
 
-		POP EBX //EBX 3.noktanın uzaklık değerini alıyor. ESI hala 1.noktada fakat artık içerisinde 4.nokta var.
+		POP EBX //EBX 3.noktanÄ±n uzaklÄ±k deÄŸerini alÄ±yor. ESI hala 1.noktada fakat artÄ±k iÃ§erisinde 4.nokta var.
 		PUSH WORD PTR[EDI + ESI]
 		PUSH WORD PTR[EDI + EBX]
 		POP WORD PTR[EDI + ESI]
-		POP WORD PTR[EDI + EBX] //Bu işlemler ile 1. ve 3.nokta yer değiştirmiş oldu.
-								//Bu işlemden sonra 1.nokta 3.noktayı, 3.nokta 4.noktayı içeriyor.
+		POP WORD PTR[EDI + EBX] //Bu iÅŸlemler ile 1. ve 3.nokta yer deÄŸiÅŸtirmiÅŸ oldu.
+								//Bu iÅŸlemden sonra 1.nokta 3.noktayÄ±, 3.nokta 4.noktayÄ± iÃ§eriyor.
 
-		POP EBX //EBX 2.noktanın uzaklık değerini alıyor. ESI hala 1.noktada fakat artık içerisinde 3.nokta var.
+		POP EBX //EBX 2.noktanÄ±n uzaklÄ±k deÄŸerini alÄ±yor. ESI hala 1.noktada fakat artÄ±k iÃ§erisinde 3.nokta var.
 		PUSH WORD PTR[EDI + ESI]
 		PUSH WORD PTR[EDI + EBX]
 		POP WORD PTR[EDI + ESI]
-		POP WORD PTR[EDI + EBX] //Bu işlemler ile 1. ve 2.nokta yer değiştirmiş oldu.
+		POP WORD PTR[EDI + EBX] //Bu iÅŸlemler ile 1. ve 2.nokta yer deÄŸiÅŸtirmiÅŸ oldu.
 
-		//Swap işlemleri bitti. Sonuç olarak:
-		//1.noktanın içerisinde 2.nokta,
-		//2.noktanın içerisinde 3.nokta,
-		//3.noktanın içerisinde 4.nokta,
-		//4.noktanın içerisinde 1.nokta bulunuyor.
+		//Swap iÅŸlemleri bitti. SonuÃ§ olarak:
+		//1.noktanÄ±n iÃ§erisinde 2.nokta,
+		//2.noktanÄ±n iÃ§erisinde 3.nokta,
+		//3.noktanÄ±n iÃ§erisinde 4.nokta,
+		//4.noktanÄ±n iÃ§erisinde 1.nokta bulunuyor.
 
 		POP EBX
-		POP ESI //değiştirdiğimiz EBX ve ESI yı tekrar indis değerlerine getiriyoruz.
-		ADD EBX, 2 //j indisini artırıyoruz
-		LOOP L0 //L0 üzerinden L1'e zıplıyor
+		POP ESI //deÄŸiÅŸtirdiÄŸimiz EBX ve ESI yÄ± tekrar indis deÄŸerlerine getiriyoruz.
+		ADD EBX, 2 //j indisini artÄ±rÄ±yoruz
+		LOOP L0 //L0 Ã¼zerinden L1'e zÄ±plÄ±yor
 
 		ADD ESI, 2
 		POP CX
-		LOOP L3 //L3 üzerinden L2'ye zıplıyor.
+		LOOP L3 //L3 Ã¼zerinden L2'ye zÄ±plÄ±yor.
 	}
 	//KODUNUZU YAZMAYI BURADA BITIRINIZ
 }
