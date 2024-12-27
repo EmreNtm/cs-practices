@@ -1,26 +1,26 @@
-#include <stdio.h>             //Emre Nitim 17011079    
-#include <stdlib.h>     //Gerçek matrisi hayali olarak küçülterek çözüme ulaştım.Her şeklin içinde öncekinden daha küçük bir hayali matris oluşuyor.
+#include <stdio.h>
+#include <stdlib.h>     //GerÃ§ek matrisi hayali olarak kÃ¼Ã§Ã¼lterek Ã§Ã¶zÃ¼me ulaÅŸtÄ±m.Her ÅŸeklin iÃ§inde Ã¶ncekinden daha kÃ¼Ã§Ã¼k bir hayali matris oluÅŸuyor.
   
 char mtr[100][100];
-int x,y; //x başlangıcı , y uzunluğu temsil edecek.
+int x,y; //x baÅŸlangÄ±cÄ± , y uzunluÄŸu temsil edecek.
 
-void dortgen(baslangic,uzunluk){ //Başlangıç: hayali matrisin gerçek matris içindeki başlangıç koordinatları , uzunluk: hayali matrisin kenar uzunluğu.
+void dortgen(baslangic,uzunluk){ //BaÅŸlangÄ±Ã§: hayali matrisin gerÃ§ek matris iÃ§indeki baÅŸlangÄ±Ã§ koordinatlarÄ± , uzunluk: hayali matrisin kenar uzunluÄŸu.
 	int i,j,k;
 	
-	k = baslangic + (uzunluk + 1) / 2 - 1;                                                    // Başlangıç koordinatı bu noktanın koordinatı.
+	k = baslangic + (uzunluk + 1) / 2 - 1;                                                    // BaÅŸlangÄ±Ã§ koordinatÄ± bu noktanÄ±n koordinatÄ±.
 	j = k;                                                                                    // V
 	for(i = baslangic; i < baslangic + (uzunluk - 1) / 2; i++){                               // . . * . .
-		mtr[i][j] = '*';                                                                      // . * . * .              Eşkenar dörtgen için
-		mtr[i][k] = '*';                                                                      // * . . . *     bir kenar uzunluğu 5 olan hayali matris örneği
+		mtr[i][j] = '*';                                                                      // . * . * .              EÅŸkenar dÃ¶rtgen iÃ§in
+		mtr[i][k] = '*';                                                                      // * . . . *     bir kenar uzunluÄŸu 5 olan hayali matris Ã¶rneÄŸi
 		j--;                                                                                  // . * . * .
 		k++;                                                                                  // . . * . .
 	}
-	x = baslangic + (uzunluk - 1) / 4 + 1;  //Bir sonraki şekil için gerekli
-	y = 2 * (i - x) + 1;                  //başlangıç ve uzunluk değerlerini buluyor.
+	x = baslangic + (uzunluk - 1) / 4 + 1;  //Bir sonraki ÅŸekil iÃ§in gerekli
+	y = 2 * (i - x) + 1;                  //baÅŸlangÄ±Ã§ ve uzunluk deÄŸerlerini buluyor.
 	for(i = baslangic + (uzunluk - 1) / 2; i < baslangic + uzunluk; i++){
 		mtr[i][j] = '*';                                                                      // * * * * *
-		mtr[i][k] = '*';                                                                      // * . . . *                  Kare için
-		j++;                                                                                  // * . . . *    bir kenar uzunluğu 5 olan hayali matris örneği 
+		mtr[i][k] = '*';                                                                      // * . . . *                  Kare iÃ§in
+		j++;                                                                                  // * . . . *    bir kenar uzunluÄŸu 5 olan hayali matris Ã¶rneÄŸi 
 		k--;                                                                                  // * . . . *
 	}                                                                                         // * * * * *
 }
@@ -33,7 +33,7 @@ void kare(baslangic,uzunluk){
 	i = k - i;
 	for(j = baslangic; j < baslangic + uzunluk; j++){
 		i = k - i;
-		mtr[i][j] = '*';         // i sırasıyla baslangic ve baslangic + uzunluk - 1 değerlerini alıyor.
+		mtr[i][j] = '*';         // i sÄ±rasÄ±yla baslangic ve baslangic + uzunluk - 1 deÄŸerlerini alÄ±yor.
 		i = k - i;
 		mtr[i][j] = '*';
 	}
@@ -42,11 +42,11 @@ void kare(baslangic,uzunluk){
 	j = k - j;
 	for(i = baslangic + 1; i < baslangic + uzunluk - 1; i++){
 		j = k - j;
-		mtr[i][j] = '*';         // j sırasıyla baslangic ve baslangic + uzunluk - 1 değerlerini alıyor.
+		mtr[i][j] = '*';         // j sÄ±rasÄ±yla baslangic ve baslangic + uzunluk - 1 deÄŸerlerini alÄ±yor.
 		j = k - j;
 		mtr[i][j] = '*';
 	}
-	x = baslangic + 1;     //Bir sonraki şekil için gerekli başlangıç ve uzunluk değerlerini buluyor.
+	x = baslangic + 1;     //Bir sonraki ÅŸekil iÃ§in gerekli baÅŸlangÄ±Ã§ ve uzunluk deÄŸerlerini buluyor.
 	y = uzunluk - 2;
 }
 
