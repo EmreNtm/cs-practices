@@ -1,0 +1,1 @@
+A console application to practice social media functions such as listing friends, adding/deleting users, by utilizing binary-search-tree.
